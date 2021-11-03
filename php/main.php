@@ -13,8 +13,15 @@
                     $result = array('error' => 'There are missing variables.');
                     echo json_encode($result);
                     return;
-                }
+            }
+
+            addTask($_POST['timestamp'], $_POST['day'], $_POST['month'], $_POST['year'], $_POST['time_required'], $_POST['title'], $_POST['description']);
         }
+    }
+
+
+    function addTask($timestamp, $day, $month, $year, $timeRequired, $title, $description) {
+        
     }
 
 ?>
