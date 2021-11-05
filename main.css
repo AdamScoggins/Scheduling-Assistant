@@ -8,7 +8,7 @@ h1 {
 }
 
 .main {
-  padding: 35px;
+  padding: 0px 35px 35px 35px;
 }
 
 .card {
@@ -17,18 +17,8 @@ h1 {
   margin-left: 15%;
 }
 
-.navigationBar {
-  background-color: white;
-  list-style-type: none;
-  margin: 0px;
-  padding: 15px;
-}
-
-.navigationElement {
-  display:inline-block;
-}
-
 .calendar {
+  text-align: center;
   list-style-type: none;
   padding: 10px 0;
   background: #eee;
@@ -49,6 +39,15 @@ h1 {
 .calendarHorizontal {
   list-style-type: none;
 }
+
 .calendarElement {
   display:inline-block;
+}
+
+.projectForm {
+  background: #eee;
+  margin-top:1%;
+  margin-left:15%;
+  margin-right:70%;
+  padding:10px;
 }
