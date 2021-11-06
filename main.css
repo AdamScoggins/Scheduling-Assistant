@@ -30,12 +30,8 @@ h1 {
   font-size:16px;
 }
 
-.calendarHorizontal {
-  list-style-type: none;
-}
-
-.calendarElement {
-  display:inline-block;
+.calendarWeeks li{
+  font-size:24px;
 }
 
 .projectForm {
