@@ -14,6 +14,7 @@ function addTask() {
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
 
+    console.log('Starting ajax request');
     // Make an AJAX request to create a new task
     $.post("php/tasks.php",
         {
@@ -29,6 +30,7 @@ function addTask() {
             // status is the status of the request
             if (status != 'success') {
                 alert('There was an error with the given request.');
+                console.log('AJAX status is: unsuccessful');
                 return;
             }
 
@@ -44,6 +46,7 @@ function addTask() {
             }
         });
 
+        console.log('Finished ajax request');
     // Stops the web-page from redirecting
     return false;
 }
@@ -56,6 +59,7 @@ function getTasks() {
         function (data, status) {
             if (status != 'success') {
                 alert('There was an error with the given request.');
+                console.log('AJAX status is: unsuccessful');
                 return false;
             }
 
