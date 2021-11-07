@@ -3,8 +3,11 @@
 <head>
 <title>Scheduling Assistant</title>
 <link rel="stylesheet" type="text/css" href="main.css"/>
+<script type="text/javascript" src="js/main.js"></script>
+<script type="text/javascript" src="js/taskDisplay.js"></script>
 </head>
 <body>
+
 
 <div class="main">
 <h1>Scheduling Assistant</h1>
@@ -18,7 +21,7 @@
  <li>Saturday</li>
 </ul>
  <ul class="calendar">
-  <li>1</li>
+  <li id="project1" onmouseover="mouseOver()" onmouseout="mouseOut()">1<br>Example Title</li>
   <li>2</li>
   <li>3</li>
   <li>4</li>
@@ -64,7 +67,7 @@
  </ul>
  <div class="projectForm">
 <h2>Create a project</h2>
-<form name="projectForm" action="">
+<form name="projectForm" onsubmit="return addTask();">
   <label for="title">Project name:</label><br>
   <input type="text" id="title" name="title" maxlength="30" required><br>
   <label for="desc">Description:</label><br>
