@@ -9,20 +9,16 @@ document.getElementsByTagName('head')[0].appendChild(script);
 function addTask() {
     // TODO: Get all the variables here
     var timestamp = Date.now();
-    var day;
-    var month;
-    var year;
-    var time_required;
-    var title;
-    var description;
+    var date = document.getElementById('date').value;
+    var time_required = document.getElementById('time_required').value;
+    var title = document.getElementById('title').value;
+    var description = document.getElementById('description').value;
 
     // Make an AJAX request to create a new task
     $.post("php/main.php",
         {
             timestamp: timestamp,
-            day: day,
-            month: month,
-            year: year,
+            date: date,
             time_required: time_required,
             title: title,
             description: description
@@ -30,6 +26,12 @@ function addTask() {
         function (data, status) {
             // data holds the resulting data from the php
             // status is the status of the request
+            var resultObj = JSON.parse(data);
+            if (resultObj.error != null) {
+                alert(resultObj.error);
+            } else {
+                alert(resultObj.message);
+            }
         });
     // 
 }

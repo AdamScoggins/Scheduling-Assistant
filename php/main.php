@@ -17,14 +17,14 @@
     if ($_POST['action'] == 'add') {
 
         // If there are missing variables, return an error
-        if (!isset($_POST['timestamp']) || !isset($_POST['day']) || !isset($_POST['month']) || !isset($_POST['year']) ||
+        if (!isset($_POST['timestamp']) || !isset($_POST['date']) ||
             !isset($_POST['time_required']) || !isset($_POST['title']) || !isset($_POST['description'])) {
                 $result = array('error' => 'There are missing variables.');
                 echo json_encode($result);
                 return;
         }
 
-        addTask($_POST['timestamp'], $_POST['day'], $_POST['month'], $_POST['year'], $_POST['time_required'], $_POST['title'], $_POST['description']);
+        addTask($_POST['timestamp'], $_POST['date'], $_POST['time_required'], $_POST['title'], $_POST['description']);
     }
 
     // The 'getTasks' action is for retrieving all of the tasks as a JSON array
@@ -33,7 +33,7 @@
     }
     
     // Add a new task to the JSON file. Return a success message, or an error
-    function addTask($timestamp, $day, $month, $year, $timeRequired, $title, $description) {
+    function addTask($timestamp, $date, $timeRequired, $title, $description) {
         try {
             // Get the file contents and convert it to JSON
             $fileData = file_get_contents($file);
@@ -46,9 +46,7 @@
 
             // Create the new task array
             $newTask = array('timestamp' => $timestamp, 
-                                'day' => $day,
-                                'month' => $month,
-                                'year' => $year,
+                                'date' => $date,
                                 'time_required' => $timeRequired,
                                 'title' => $title,
                                 'description' => $description);
