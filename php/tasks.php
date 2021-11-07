@@ -1,6 +1,7 @@
 <?php
 // This file returns a JSON encoded array as a result
 
+    header('Access-Control-Allow-Origin: *');
     // This is where the code begins execution
     if (!isset($_POST['action'])) {
         $result = array('error' => 'There is no action in the given request.');
