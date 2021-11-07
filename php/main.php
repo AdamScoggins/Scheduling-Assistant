@@ -1,9 +1,6 @@
 <?php
 // This file returns a JSON encoded array as a result
 
-    // Fields
-    $file = "data.json";
-
     // This is where the code begins execution
     if (!isset($_POST['action'])) {
         $result = array('error' => 'There is no action in the given request.');
@@ -34,8 +31,12 @@
     
     // Add a new task to the JSON file. Return a success message, or an error
     function addTask($timestamp, $date, $timeRequired, $title, $description) {
+
+        $file = "data.json";
+
         try {
             // Get the file contents and convert it to JSON
+
             $fileData = file_get_contents($file);
             $arrayData = json_decode($fileData, true);
 
@@ -64,20 +65,23 @@
                 echo json_encode($result);
             }
         } catch (Exception $e) {
-            $result = array('error' => $e->getMessage());
+            $result = array('error' => 'Task could not be added.');
             echo json_encode($result);
         }
     }
 
     // Return all of the tasks in the JSON file, or an error
     function getTasks() {
+
+        $file = "data.json";
+        
         try {
             $fileData = file_get_contents($file);
             $arrayData = json_decode($fileData, true);
             $result = array('tasks' => $arrayData);
             echo json_encode($result);
         } catch (Exception $e) {
-            $result = array('error' => $e->getMessage());
+            $result = array('error' => 'Tasks could not be retrieved.');
             echo json_encode($result);
         }
     }

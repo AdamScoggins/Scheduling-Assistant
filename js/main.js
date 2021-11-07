@@ -2,7 +2,7 @@
 var jqueryScript = document.createElement('script');
 jqueryScript.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 jqueryScript.type = 'text/javascript';
-document.getElementsByTagName('head')[0].appendChild(script);
+document.getElementsByTagName('head')[0].appendChild(jqueryScript);
 
 // Send an AJAX request to main.php to add a new task
 // into the JSON document
@@ -17,6 +17,7 @@ function addTask() {
     // Make an AJAX request to create a new task
     $.post("php/main.php",
         {
+            action: 'add',
             timestamp: timestamp,
             date: date,
             time_required: time_required,
@@ -27,6 +28,7 @@ function addTask() {
             // data holds the resulting data from the php
             // status is the status of the request
             var resultObj = JSON.parse(data);
+            console.log(resultObj);
             if (resultObj.error != null) {
                 alert(resultObj.error);
             } else {
