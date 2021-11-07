@@ -8,27 +8,11 @@ h1 {
 }
 
 .main {
-  padding: 35px;
-}
-
-.card {
-  background-color: white;
-  margin-right: 65%;
-  margin-left: 15%;
-}
-
-.navigationBar {
-  background-color: white;
-  list-style-type: none;
-  margin: 0px;
-  padding: 15px;
-}
-
-.navigationElement {
-  display:inline-block;
+  padding: 0px 35px 35px 35px;
 }
 
 .calendar {
+  text-align: center;
   list-style-type: none;
   padding: 10px 0;
   background: #eee;
@@ -46,9 +30,14 @@ h1 {
   font-size:16px;
 }
 
-.calendarHorizontal {
-  list-style-type: none;
+.calendarWeeks li{
+  font-size:24px;
 }
-.calendarElement {
-  display:inline-block;
+
+.projectForm {
+  background: #eee;
+  margin-top:1%;
+  margin-left:15%;
+  margin-right:70%;
+  padding:10px;
 }
