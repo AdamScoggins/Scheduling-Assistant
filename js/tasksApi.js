@@ -7,7 +7,7 @@ document.getElementsByTagName('head')[0].appendChild(jqueryScript);
 // Send an AJAX request to main.php to add a new task
 // into the JSON document
 function addTask() {
-    // TODO: Get all the variables here
+    var action = 'add';
     var timestamp = Date.now();
     var date = document.getElementById('date').value;
     var time_required = document.getElementById('time_required').value;
@@ -17,12 +17,12 @@ function addTask() {
     // Make an AJAX request to create a new task
     $.post("php/tasks.php",
         {
-            action: 'add',
-            timestamp: timestamp,
-            date: date,
-            time_required: time_required,
-            title: title,
-            description: description
+            action,
+            timestamp,
+            date,
+            time_required,
+            title,
+            description
         },
         function (data, status) {
             // data holds the resulting data from the php
@@ -37,6 +37,7 @@ function addTask() {
 
             // There will either be an error or a success message
             if (resultObj.error != null) {
+                console.log(resultObj.error);
                 alert(resultObj.error);
             } else {
                 alert(resultObj.message);
@@ -45,4 +46,30 @@ function addTask() {
 
     // Stops the web-page from redirecting
     return false;
+}
+
+function getTasks() {
+    var action = 'getTasks';
+
+    $.post("php/tasks.php",
+        { action },
+        function (data, status) {
+            if (status != 'success') {
+                alert('There was an error with the given request.');
+                return false;
+            }
+
+            var resultObj = JSON.parse(data);
+            console.log(resultObj);
+
+            // There is either an error or a tasks property
+            if (resultObj.error != null) {
+                alert(resultObj.error);
+                console.log(resultObj.error);
+            } else {
+                var tasks = resultObj.tasks;
+                return tasks;
+            }
+        });
+
 }

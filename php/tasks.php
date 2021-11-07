@@ -78,6 +78,12 @@
         try {
             $fileData = file_get_contents($file);
             $arrayData = json_decode($fileData, true);
+
+            // Should fix an error that happens when there aren't any tasks
+            if ($arrayData == null) {
+                $arrayData = array();
+            }
+
             $result = array('tasks' => $arrayData);
             echo json_encode($result);
         } catch (Exception $e) {
