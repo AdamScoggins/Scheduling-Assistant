@@ -4,6 +4,8 @@ jqueryScript.src = 'https://code.jquery.com/jquery-3.6.0.min.js';
 jqueryScript.type = 'text/javascript';
 document.getElementsByTagName('head')[0].appendChild(script);
 
+// Send an AJAX request to main.php to add a new task
+// into the JSON document
 function addTask() {
     // TODO: Get all the variables here
     var timestamp = Date.now();
