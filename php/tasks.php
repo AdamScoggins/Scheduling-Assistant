@@ -2,7 +2,6 @@
 // This file returns a JSON encoded array as a result
 
     header('Access-Control-Allow-Origin: *');
-    header('Content-Type: application/json; charset=utf-8');
     
     // This is where the code begins execution
     if (!isset($_POST['action'])) {

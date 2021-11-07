@@ -16,46 +16,9 @@ function addTask() {
 
     console.log('Starting ajax request');
     // Make an AJAX request to create a new task
-    // $.post("php/tasks.php",
+    $.post("php/tasks.php",
 
-    //     {
-    //         action,
-    //         timestamp,
-    //         date,
-    //         time_required,
-    //         title,
-    //         description
-    //     },
-    //     function (data, status) {
-    //         // data holds the resulting data from the php
-    //         // status is the status of the request
-    //         if (status != 'success') {
-    //             alert('There was an error with the given request.');
-    //             console.log('AJAX status is: unsuccessful');
-    //             return;
-    //         }
-
-    //         var resultObj = JSON.parse(data);
-    //         console.log(resultObj);
-
-    //         // There will either be an error or a success message
-    //         if (resultObj.error != null) {
-    //             console.log(resultObj.error);
-    //             alert(resultObj.error);
-    //         } else {
-    //             alert(resultObj.message);
-    //         }
-    //     });
-
-    //     console.log('Finished ajax request');
-    // Stops the web-page from redirecting
-    //return false;
-
-    // new
-    $.ajax({
-        type: "POST",
-        url: "php/tasks.php",
-        data: {
+        {
             action,
             timestamp,
             date,
@@ -63,11 +26,16 @@ function addTask() {
             title,
             description
         },
-        headers: { "Access-Control-Allow-Origin": "*"},
-        success: function (data) {
+        function (data, status) {
+            // data holds the resulting data from the php
+            // status is the status of the request
+            if (status != 'success') {
+                alert('There was an error with the given request.');
+                console.log('AJAX status is: unsuccessful');
+                return;
+            }
 
-            console.log('Data: ' + JSON.stringify(data));
-            var resultObj = JSON.parse(JSON.stringify(data));
+            var resultObj = JSON.parse(data);
             console.log(resultObj);
 
             // There will either be an error or a success message
@@ -77,9 +45,10 @@ function addTask() {
             } else {
                 alert(resultObj.message);
             }
-        }
-    });
+        });
 
+        console.log('Finished ajax request');
+    // Stops the web-page from redirecting
     return false;
 }
 
