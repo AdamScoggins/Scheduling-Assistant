@@ -15,7 +15,7 @@ function addTask() {
     var description = document.getElementById('description').value;
 
     // Make an AJAX request to create a new task
-    $.post("php/main.php",
+    $.post("php/tasks.php",
         {
             action: 'add',
             timestamp: timestamp,
