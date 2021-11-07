@@ -27,13 +27,22 @@ function addTask() {
         function (data, status) {
             // data holds the resulting data from the php
             // status is the status of the request
+            if (status != 'success') {
+                alert('There was an error with the given request.');
+                return;
+            }
+
             var resultObj = JSON.parse(data);
             console.log(resultObj);
+
+            // There will either be an error or a success message
             if (resultObj.error != null) {
                 alert(resultObj.error);
             } else {
                 alert(resultObj.message);
             }
         });
-    // 
+
+    // Stops the web-page from redirecting
+    return false;
 }
