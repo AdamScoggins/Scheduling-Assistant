@@ -63,17 +63,11 @@ function addTask() {
             title,
             description
         },
-        headers: { "Access-Control-Allow-Origin": "*" },
-        success: function (data, status) {
-            // data holds the resulting data from the php
-            // status is the status of the request
-            if (status != 'success') {
-                alert('There was an error with the given request.');
-                console.log('AJAX status is: unsuccessful');
-                return;
-            }
+        headers: { "Access-Control-Allow-Origin": "*"},
+        success: function (data) {
 
-            var resultObj = JSON.parse(data);
+            console.log('Data: ' + JSON.stringify(data));
+            var resultObj = JSON.parse(JSON.stringify(data));
             console.log(resultObj);
 
             // There will either be an error or a success message
