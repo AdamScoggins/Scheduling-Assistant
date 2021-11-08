@@ -62,6 +62,7 @@ function fetchTasks() {
                 var tasks = resultObj.tasks;
                 console.log(tasks);
                 storeTasks(tasks);
+                displayAllTasks();
             }
         }
     });

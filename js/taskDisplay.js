@@ -40,9 +40,9 @@ function displayAllTasks() {
 
     selectedDay = document.getElementById("calendar").getElementsByTagName("li")[day-1];
     if (desc != "") {
-      selectedDay.innerHTML = day+"<br>"+title+"<br>"+desc+"<br>"+timeRequired+" hours to completion";
+      selectedDay.innerHTML = day+"<br>"+title+"<br>"+desc+"<br>"+timeRequired+" hours left";
     }
     else
-    selectedDay.innerHTML = day+"<br>"+title+"<br>"+timeRequired+" hours to completion";
+    selectedDay.innerHTML = day+"<br>"+title+"<br>"+timeRequired+" hours left<br><br>";
   }
 }
