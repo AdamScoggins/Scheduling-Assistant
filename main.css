@@ -1,6 +1,6 @@
 
 body {
-  background-color: #ccd;
+  background-color: #81b0b2;
 }
 
 h1 {
@@ -15,7 +15,7 @@ h1 {
   text-align: center;
   list-style-type: none;
   padding: 10px 0;
-  background: #eee;
+  background: #d6ead4;
   margin: 0;
   margin-left: 15%;
   margin-right:15%;
@@ -35,7 +35,7 @@ h1 {
 }
 
 .projectForm {
-  background: #eee;
+  background: #d6ead4;
   margin-top:1%;
   margin-left:15%;
   margin-right:70%;
