@@ -8,6 +8,7 @@ function mouseOut() {
   document.getElementById("project1").innerHTML =
   "1<br>Example Title";
 }
-function assignTask() {
-
+function assignTask(taskNumber) {
+  taskInfo = JSON.parse(return getTasks()[taskNumber]);
+  console.log(taskInfo)
 }
