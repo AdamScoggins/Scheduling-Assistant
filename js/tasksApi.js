@@ -34,6 +34,7 @@ function addTask() {
                 console.log(resultObj.error);
                 alert(resultObj.error);
             } else {
+                fetchTasks();
                 alert(resultObj.message);
             }
         });
@@ -64,6 +65,8 @@ function fetchTasks() {
             }
         }
     });
+
+    return false;
 }
 
 // Handles the fetchTasks ajax result data by setting tasks in local storage
