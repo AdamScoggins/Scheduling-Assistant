@@ -14,10 +14,8 @@ function addTask() {
     var title = document.getElementById('title').value;
     var description = document.getElementById('description').value;
 
-    console.log('Starting ajax request');
     // Make an AJAX request to create a new task
     $.post("php/tasks.php",
-
         {
             action,
             timestamp,
@@ -26,15 +24,8 @@ function addTask() {
             title,
             description
         },
-        function (data, status) {
+        function (data) {
             // data holds the resulting data from the php
-            // status is the status of the request
-            if (status != 'success') {
-                alert('There was an error with the given request.');
-                console.log('AJAX status is: unsuccessful');
-                return;
-            }
-
             var resultObj = JSON.parse(data);
             console.log(resultObj);
 
@@ -47,29 +38,13 @@ function addTask() {
             }
         });
 
-    console.log('Finished ajax request');
     // Stops the web-page from redirecting
     return false;
 }
 
+// fetches the tasks from the backend and stores the result using storeTasks
 function fetchTasks() {
     var action = 'getTasks';
-
-    // $.ajax("php/tasks.php",
-    //     { action },
-    //     function (data) {
-    //         var resultObj = JSON.parse(data);
-
-    //         // There is either an error or a tasks property
-    //         if (resultObj.error != null) {
-    //             alert(resultObj.error);
-    //             console.log(resultObj.error);
-    //         } else {
-    //             var tasks = resultObj.tasks;
-    //             console.log(tasks);
-    //             return tasks;
-    //         }
-    //     });
 
     $.ajax({
         url: 'php/tasks.php',
@@ -96,7 +71,9 @@ function storeTasks(tasks) {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+// Fetches and returns all of the tasks in the local storage
 function getTasks() {
     fetchTasks();
-    return localStorage.getItem('tasks');
+    var tasksString = localStorage.getItem('tasks');
+    return JSON.parse(tasksString);
 }
