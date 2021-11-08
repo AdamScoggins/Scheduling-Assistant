@@ -47,25 +47,37 @@ function addTask() {
             }
         });
 
-        console.log('Finished ajax request');
+    console.log('Finished ajax request');
     // Stops the web-page from redirecting
     return false;
 }
 
-function getTasks() {
+function fetchTasks() {
     var action = 'getTasks';
 
-    $.post("php/tasks.php",
-        { action },
-        function (data, status) {
-            if (status != 'success') {
-                alert('There was an error with the given request.');
-                console.log('AJAX status is: unsuccessful');
-                return false;
-            }
+    // $.ajax("php/tasks.php",
+    //     { action },
+    //     function (data) {
+    //         var resultObj = JSON.parse(data);
 
+    //         // There is either an error or a tasks property
+    //         if (resultObj.error != null) {
+    //             alert(resultObj.error);
+    //             console.log(resultObj.error);
+    //         } else {
+    //             var tasks = resultObj.tasks;
+    //             console.log(tasks);
+    //             return tasks;
+    //         }
+    //     });
+
+    $.ajax({
+        url: 'php/tasks.php',
+        type: 'POST',
+        data: { action },
+        async: false,
+        success: function (data) {
             var resultObj = JSON.parse(data);
-            console.log(resultObj);
 
             // There is either an error or a tasks property
             if (resultObj.error != null) {
@@ -73,8 +85,19 @@ function getTasks() {
                 console.log(resultObj.error);
             } else {
                 var tasks = resultObj.tasks;
-                return tasks;
+                console.log(tasks);
+                setTasks(tasks);
             }
-        });
+        }
+    });
+}
 
+// Handles the fetchTasks ajax result data by setting cTasks
+var tasks;
+function setTasks(tasks) {
+    this.tasks = tasks;
+}
+
+function getTasks() {
+    return tasks;
 }
