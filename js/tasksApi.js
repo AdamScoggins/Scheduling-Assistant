@@ -75,7 +75,6 @@ function fetchTasks() {
         url: 'php/tasks.php',
         type: 'POST',
         data: { action },
-        async: false,
         success: function (data) {
             var resultObj = JSON.parse(data);
 
@@ -86,18 +85,17 @@ function fetchTasks() {
             } else {
                 var tasks = resultObj.tasks;
                 console.log(tasks);
-                setTasks(tasks);
+                storeTasks(tasks);
             }
         }
     });
 }
 
-// Handles the fetchTasks ajax result data by setting cTasks
-var tasks;
-function setTasks(tasks) {
-    this.tasks = tasks;
+// Handles the fetchTasks ajax result data by setting tasks in local storage
+function storeTasks(tasks) {
+    localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
 function getTasks() {
-    return tasks;
+    return localStorage.getItem('tasks');
 }
