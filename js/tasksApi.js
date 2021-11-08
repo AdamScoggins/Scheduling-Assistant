@@ -97,5 +97,6 @@ function storeTasks(tasks) {
 }
 
 function getTasks() {
+    fetchTasks();
     return localStorage.getItem('tasks');
 }
