@@ -6,7 +6,7 @@
 <script type="text/javascript" src="js/tasksApi.js"></script>
 <script type="text/javascript" src="js/taskDisplay.js"></script>
 </head>
-<body>
+<body onload="displayAllTasks()">
 
 
 <div class="main">
@@ -20,51 +20,49 @@
  <li>Friday</li>
  <li>Saturday</li>
 </ul>
- <ul class="calendar">
-  <li id="project1" onmouseover="mouseOver()" onmouseout="mouseOut()">1<br>Example Title</li>
-  <li onmouseover="assignTask(0)">2</li>
-  <li>3</li>
-  <li>4</li>
-  <li>5</li>
-  <li>6</li>
-  <li>7</li>
- </ul>
- <ul class="calendar">
-  <li>8</li>
-  <li>9</li>
-  <li>10</li>
-  <li>11</li>
-  <li>12</li>
-  <li>13</li>
-  <li>14</li>
- </ul>
- <ul class="calendar">
-  <li>15</li>
-  <li>16</li>
-  <li>17</li>
-  <li>18</li>
-  <li>19</li>
-  <li>20</li>
-  <li>21</li>
- </ul>
- <ul class="calendar">
-  <li>22</li>
-  <li>23</li>
-  <li>24</li>
-  <li>25</li>
-  <li>26</li>
-  <li>27</li>
-  <li>28</li>
- </ul>
- <ul class="calendar">
-  <li>29</li>
-  <li>30</li>
-  <li>31</li>
-  <li></li>
-  <li></li>
-  <li></li>
-  <li></li>
- </ul>
+<ul class="calendar" id="calendar">
+  <div class = "calendarItem">
+ <li>1</li>
+ <li>2</li>
+ <li>3</li>
+ <li>4</li>
+ <li>5</li>
+ <li>6</li>
+ <li>7</li>
+ <br>
+ <li>8</li>
+ <li>9</li>
+ <li>10</li>
+ <li>11</li>
+ <li>12</li>
+ <li>13</li>
+ <li>14</li>
+ <br>
+ <li>15</li>
+ <li>16</li>
+ <li>17</li>
+ <li>18</li>
+ <li>19</li>
+ <li>20</li>
+ <li>21</li>
+ <br>
+ <li>22</li>
+ <li>23</li>
+ <li>24</li>
+ <li>25</li>
+ <li>26</li>
+ <li>27</li>
+ <li>28</li>
+ <br>
+ <li>29</li>
+ <li>30</li>
+ <li>31</li>
+ <li></li>
+ <li></li>
+ <li></li>
+ <li></li>
+</div>
+</ul>
  <div class="projectForm">
 <h2>Create a project</h2>
 <form name="projectForm" onsubmit="return addTask();">
@@ -77,6 +75,7 @@
   <label for="date">Date:</label><br>
   <input type="date" id="date" name="date" required><br><br>
   <input type="submit" value="Create Project">
+  <button type="button" onclick="displayAllTasks()">Display projects</button>
 </form>
 </div>
 
