@@ -1,43 +1,169 @@
 
 body {
-  background-color: #81b0b2;
-}
-
-h1 {
+  font-family: "Montserrat";
   text-align: center;
 }
 
-.main {
-  padding: 0px 35px 35px 35px;
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Montserrat-Bold";
 }
 
-.calendar {
-  text-align: center;
-  list-style-type: none;
-  padding: 10px 0;
-  background: #d6ead4;
-  margin: 0;
-  margin-left: 15%;
-  margin-right:15%;
+p {
+  color: #8f8f8f;
 }
 
-.calendar li {
-  list-style-type: none;
-  display: inline-block;
-  width: 13%;
-  text-align: center;
-  margin-bottom: 50px;
-  font-size:16px;
+input{
+  border-radius: 8px;
+  text-align: left;
+  padding-left: 5px;
+  width: 100%;
+
 }
 
-.calendarWeeks li{
-  font-size:24px;
+input:focus{
+  outline: none;
 }
 
-.projectForm {
-  background: #d6ead4;
-  margin-top:1%;
-  margin-left:15%;
-  margin-right:70%;
-  padding:10px;
+textarea
+{
+  border-radius: 8px;
+  width:100%;
+  padding-left: 5px;
+}
+
+
+
+/* Headings */
+
+.big-heading {
+  font-family: "Montserrat-Black";
+  font-size: 2.5rem;
+  line-height: 1.5;
+}
+
+.sub-heading {
+  font-family: "Montserrat-Black";
+  font-size: 1rem;
+}
+
+.container-fluid{
+  padding: 3% 2%;
+}
+
+.user_tasks{
+  background-color: #96C7C1;
+  border-radius: 30px;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  margin-bottom: 25px;
+}
+
+/* Sections */
+
+.colored-section {
+  background-color: #1597bb;
+  color: #fff;
+}
+
+.white-section {
+  background-color: #fff;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+
+
+#title {
+  background-color: #1597bb;
+  color: #fff;
+  text-align: left;
+}
+
+#yourtasks{
+  background-color: #1597bb;
+  color: #fff;
+  text-align: left;
+}
+
+#yourtasks .container-fluid {
+  padding: 2% 5% 2% 5%;
+}
+
+
+#title .container-fluid {
+  padding: 2% 5% 2% 5%;
+}
+
+
+/* Navigation Bar */
+
+.navbar {
+  padding: 0 0 6rem;
+}
+
+.navbar-brand {
+  font-family: "Ubuntu";
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.nav-item {
+  padding: 0 10px;
+}
+
+.nav-link {
+  font-size: 1.2rem;
+  font-family: "Montserrat-Light";
+}
+
+.title-image{
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 70%;
+  height: auto;
+
+  border-radius: 30px;
+
+
+}
+
+.task_detais{
+  text-align: left;
+
+}
+
+.social-icon {
+  color: #1597bb;
+  margin: 20px 20px;
+}
+
+
+
+.social-icon:hover {
+  color: #94DAFF;;
+}
+
+.footer-text{
+  color: #1597bb;
+}
+
+
+
+
+
+
+@media (max-width: 1028px) {
+
+  #title {
+    text-align: center;
+  }
+  .title-image{
+    width: 80%;
+    padding-top: 20px;
+    padding-bottom: 20px;
+  }
+
+
 }
