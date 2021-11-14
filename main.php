@@ -1,3 +1,16 @@
+<?php
+session_start();
+include("scripts/config.php");
+
+
+if(!isset($_SESSION['username'] ) ){
+  header("Location:index.php");
+}
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -58,6 +71,12 @@
             <a class="nav-link" href="#yourtasks">Your Tasks</a>
           </li>
 
+          <li class="nav-item">
+              <a class="nav-link" href="scripts/logout.php">
+                <button class="btn btn-warning"> Logout</button>
+              </a>
+          </li>
+
         </ul>
 
       </div>
@@ -69,7 +88,8 @@
     <div class="row">
 
       <div class="col-lg-6">
-        <h1 class="med-heading">Task Scheduling Assistant</h1>
+        <?php echo "<h1> Welcome ".ucfirst($_SESSION['username'])."</h1>";?>
+        <!-- <h1 class="med-heading">Task Scheduling Assistant</h1> -->
         <h4 class="sub-heading">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
           </h4>
       </div>
