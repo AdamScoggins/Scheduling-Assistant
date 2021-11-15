@@ -8,8 +8,47 @@ if(!isset($_SESSION['username'] ) ){
 }
 
 
-?>
+$mysqli = mysqli_connect('localhost', 'root', '', 'schedulingAssistant');
+$current_user = strval($_SESSION['username']);
+$all_tasks = mysqli_query($mysqli, "SELECT * FROM tasks WHERE username='$current_user' and completed=0 ORDER BY year ASC,month ASC,day ASC;");
 
+if(isset($_POST['newtask'])){
+	$title = mysqli_real_escape_string($mysqli, $_POST['tasktitle']);
+  $description = mysqli_real_escape_string($mysqli, $_POST['description']);
+  $time_required = mysqli_real_escape_string($mysqli, $_POST['time_required']);
+  $date = mysqli_real_escape_string($mysqli, $_POST['date']);
+  $orderdate = explode('-', $date);
+  $year = $orderdate[0];
+  $month   = $orderdate[1];
+  $day  = $orderdate[2];
+	$same_task = mysqli_query($mysqli,"SELECT * FROM tasks WHERE username='$current_user' and title='$title' and description='$description' and timeRequired='$time_required' and day=$day and month=$month and year=$year;");
+
+	if (!$same_task || mysqli_num_rows($same_task) == 0){
+
+    if(empty($title) || empty($description) || empty($time_required) ) {
+        echo "error";
+    } else {
+      $newTask = mysqli_query($mysqli, "INSERT INTO tasks(username,title,description,timeRequired,day,month,year,completed) VALUES('$current_user','$title','$description','$time_required',$day,$month,$year,0)");
+
+      if(!$newTask){
+        echo '<script>alert("Task Id Already Exist. Data Not inserted")</script>';
+      }
+
+      $mysqli->close();
+      header("Refresh:0");
+
+      }
+
+	}
+	else{
+    echo '<script>alert("Same Task Already Exist.")</script>';
+		$mysqli->close();
+		header("Refresh:0");
+	}
+
+}
+
+?>
 
 <!DOCTYPE html>
 <html>
@@ -43,7 +82,7 @@ if(!isset($_SESSION['username'] ) ){
 </head>
 
 
-<body onload="displayAllTasks()">
+<body>
 
 
 
@@ -119,7 +158,7 @@ if(!isset($_SESSION['username'] ) ){
 
 
 
-<form id="AddNewTaskForm" method="post" name="AddNewTaskForm" onsubmit="return addTask();">
+<form id="AddNewTaskForm" method="post" name="AddNewTaskForm"">
 
 
 
@@ -128,7 +167,7 @@ if(!isset($_SESSION['username'] ) ){
         <b>Task Name : </b>
     </div>
     <div class="col-lg-12">
-        <input required align="left" placeholder="Enter Task Name" type="text" name="titlea" id="titlea"> <br/><br/>
+        <input required align="left" placeholder="Enter Task Name" type="text" name="tasktitle" id="tasktitle"> <br/><br/>
     </div>
 
 
@@ -192,58 +231,46 @@ if(!isset($_SESSION['username'] ) ){
     </div>
 
 <!-- task 1 -->
-    <div class="col-lg-12 user_tasks">
 
-      <div>
-          <b>Title : </b>
-          <p>Doctor Appointment </p>
-      </div>
+<?php
+while($res = mysqli_fetch_array($all_tasks)) {
+  echo "<div class='col-lg-12 user_tasks'>";
+  echo "<center>
 
-      <div>
-          <b>Description : </b>
-          <p>Treatment of Throat from Doctor </p>
-      </div>
+  <div><a href=\"TaskEdit.php?id=$res[taskid]\"><button class='btn btn-warning'>Update</button></a> ||
+  <a href=\"TaskDelete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you want to delete?')\"><button class='btn btn-warning'>Delete</button></a> ||
+  <a href=\"TaskComplete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you to mark task as completed?')\"><button class='btn btn-warning'>Mark As Completed</button></a></div>
+  </center>
+  ";
 
-      <div>
-          <b>Time Required : </b>
-          <p>Number of hours: 04</p>
-      </div>
+    echo "<div>";
+    echo "<b>".'Title :'."</b>";
+        echo "<p>".$res['title']. "</p>";
+    echo "</div>";
 
-      <div>
-          <b>Date : </b>
-          <p>Nov 15, 2021 </p>
-      </div>
+    echo "<div>";
+    echo "<b>".'Description :'."</b>";
+        echo "<p>".$res['description']. "</p>";
+    echo "</div>";
 
-    </div>
+    echo "<div>";
+    echo "<b>".'Time Required :'."</b>";
+        echo "<p>".$res['timeRequired'].' hr'."</p>";
+    echo "</div>";
 
-<!-- task 2 -->
-
-
-<div class="col-lg-12 user_tasks" >
-
-  <div>
-      <b>Title : </b>
-      <p>Daily Running  </p>
-  </div>
-
-  <div>
-      <b>Description : </b>
-      <p>3km of running on daily basis </p>
-  </div>
-
-  <div>
-      <b>Time Required : </b>
-      <p>Number of hours: 01</p>
-  </div>
-
-  <div>
-      <b>Date : </b>
-      <p>Nov 12, 2021 </p>
-  </div>
-
-</div>
+    echo "<div>";
+    echo "<b>".'Date :'."</b>";
+        echo "<p>".$res['day'].'/'.$res['month'].'/'.$res['year']."</p>";
+    echo "</div>";
 
 
+
+  echo "</div>";
+
+}
+$mysqli->close();
+
+?>
 
   </div>
 
