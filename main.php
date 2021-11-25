@@ -233,41 +233,120 @@ if(isset($_POST['newtask'])){
 <!-- task 1 -->
 
 <?php
-while($res = mysqli_fetch_array($all_tasks)) {
+
+
+if (mysqli_num_rows($all_tasks) == 0){
   echo "<div class='col-lg-12 user_tasks'>";
   echo "<center>
-
-  <div><a href=\"TaskEdit.php?id=$res[taskid]\"><button class='btn btn-warning'>Update</button></a> ||
-  <a href=\"TaskDelete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you want to delete?')\"><button class='btn btn-warning'>Delete</button></a> ||
-  <a href=\"TaskComplete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you to mark task as completed?')\"><button class='btn btn-warning'>Mark As Completed</button></a></div>
-  </center>
-  ";
-
-    echo "<div>";
-    echo "<b>".'Title :'."</b>";
-        echo "<p>".$res['title']. "</p>";
-    echo "</div>";
-
-    echo "<div>";
-    echo "<b>".'Description :'."</b>";
-        echo "<p>".$res['description']. "</p>";
-    echo "</div>";
-
-    echo "<div>";
-    echo "<b>".'Time Required :'."</b>";
-        echo "<p>".$res['timeRequired'].' hr'."</p>";
-    echo "</div>";
-
-    echo "<div>";
-    echo "<b>".'Date :'."</b>";
-        echo "<p>".$res['day'].'/'.$res['month'].'/'.$res['year']."</p>";
-    echo "</div>";
-
-
-
+  <h4>You don't Have Any Task To Complete.</h4>
+  </center>";
   echo "</div>";
+}
+
+else if (mysqli_num_rows($all_tasks) <= 3) {
+
+  while($res = mysqli_fetch_array($all_tasks)) {
+    echo "<div class='col-lg-12 user_tasks'>";
+    echo "<center>
+
+    <div><a href=\"TaskEdit.php?id=$res[taskid]\"><button class='btn btn-warning'>Update</button></a> ||
+    <a href=\"TaskDelete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you want to delete?')\"><button class='btn btn-warning'>Delete</button></a> ||
+    <a href=\"TaskComplete.php?id=$res[taskid]\" onClick=\"return confirm('Are you sure you to mark task as completed?')\"><button class='btn btn-warning'>Mark As Completed</button></a></div>
+    </center>
+    ";
+    echo "<br>";
+    echo "<br>";
+
+      echo "<div>";
+      echo "<b>".'Title :'."</b>";
+          echo "<p>".$res['title']. "</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Description :'."</b>";
+          echo "<p>".$res['description']. "</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Time Required :'."</b>";
+          echo "<p>".$res['timeRequired'].' hr'."</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Date :'."</b>";
+          echo "<p>".$res['day'].'/'.$res['month'].'/'.$res['year']."</p>";
+      echo "</div>";
+
+
+
+    echo "</div>";
+
+  }
 
 }
+
+else if (mysqli_num_rows($all_tasks) >= 4){
+  $tasksArray = [];
+  while($res = mysqli_fetch_array($all_tasks)) {
+    array_push($tasksArray,$res);
+  }
+
+  $x = 0;
+  while($x<3){
+    $x = $x + 1;
+    echo "<div class='col-lg-12 user_tasks'>";
+    $taskId = $tasksArray[$x]['taskid'];
+    echo "<center>
+
+    <div><a href=\"TaskEdit.php?id=$taskId\"><button class='btn btn-warning'>Update</button></a> ||
+    <a href=\"TaskDelete.php?id=$taskId\" onClick=\"return confirm('Are you sure you want to delete?')\"><button class='btn btn-warning'>Delete</button></a> ||
+    <a href=\"TaskComplete.php?id=$taskId\" onClick=\"return confirm('Are you sure you to mark task as completed?')\"><button class='btn btn-warning'>Mark As Completed</button></a></div>
+    </center>
+    ";
+    echo "<br>";
+    echo "<br>";
+
+      echo "<div>";
+      echo "<b>".'Title :'."</b>";
+          echo "<p>".$tasksArray[$x]['title']. "</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Description :'."</b>";
+          echo "<p>".$tasksArray[$x]['description']. "</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Time Required :'."</b>";
+          echo "<p>".$tasksArray[$x]['timeRequired'].' hr'."</p>";
+      echo "</div>";
+
+      echo "<div>";
+      echo "<b>".'Date :'."</b>";
+          echo "<p>".$tasksArray[$x]['day'].'/'.$tasksArray[$x]['month'].'/'.$tasksArray[$x]['year']."</p>";
+      echo "</div>";
+      echo "</div>";
+
+
+  }
+
+  echo "
+
+  <div><a href=\"allTasks.php\"><button class='btn btn-warning'>Show All Tasks</button></a></div>";
+
+
+
+
+
+
+
+
+}
+
+
+
+
+
 $mysqli->close();
 
 ?>
