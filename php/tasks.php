@@ -122,12 +122,21 @@
 
             foreach($arrayData as $key => $task) {
                 if ($timestamp == $task['timestamp']) {
+                    // Remove the task from the array
                     unset($arrayData[$key]);
-                    echo json_encode($arrayData);
+
+                    // Encode the array
+                    $fileData = json_encode($arrayData);
+
+                    // Re-write the file contents without the removed task
+                    file_put_contents($file, $fileData);
+
+                    echo $fileData;
                     return;
                 }
             }
 
+            // All values were iterated through and the task was not found
             $result = array('error' => 'Could not find the specified task.');
             echo json_encode($result);
         } catch (Exception $e) {
