@@ -30,6 +30,17 @@
     if ($_POST['action'] == 'getTasks') {
         getTasks();
     }
+
+    // 'removeTask' function is for removing a task from the JSON file
+    if ($_POST['action'] == 'removeTask') {
+        if (isset($_POST['timestamp'])) {
+            removeTask($_POST['timestamp']);
+        } else {
+            $result = array('error' => 'No timestamp provided.');
+            echo json_encode($result);
+            return;
+        }
+    }
     
     // Add a new task to the JSON file. Return a success message, or an error
     function addTask($timestamp, $date, $timeRequired, $title, $description) {
@@ -90,6 +101,37 @@
             echo json_encode($result);
         } catch (Exception $e) {
             $result = array('error' => 'Tasks could not be retrieved.');
+            echo json_encode($result);
+        }
+    }
+
+    // Removes a task from the JSON file
+    function removeTask($timestamp) {
+
+        $file = "data.json";
+
+        try {
+            $fileData = file_get_contents($file);
+            $arrayData = json_decode($fileData, true);
+
+            if ($arrayData == null) {
+                $result = array('error' => 'No task exists');
+                echo json_encode($result);
+                return;
+            }
+
+            foreach($arrayData as $key => $task) {
+                if ($timestamp == $task['timestamp']) {
+                    unset($arrayData[$key]);
+                    echo json_encode($arrayData);
+                    return;
+                }
+            }
+
+            $result = array('error' => 'Could not find the specified task.');
+            echo json_encode($result);
+        } catch (Exception $e) {
+            $result = array('error' => 'Could not remove task.');
             echo json_encode($result);
         }
     }
