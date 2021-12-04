@@ -131,6 +131,7 @@
                     // Re-write the file contents without the removed task
                     file_put_contents($file, $fileData);
 
+                    // Return the updated tasks
                     $result = array('tasks' => $arrayData);
                     echo json_encode($result);
                     return;
