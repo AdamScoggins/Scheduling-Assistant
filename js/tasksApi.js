@@ -36,6 +36,7 @@ function addTask() {
             } else {
                 fetchTasks();
                 alert(resultObj.message);
+                displayAllTasks();
             }
         });
 
@@ -62,7 +63,6 @@ function fetchTasks() {
                 var tasks = resultObj.tasks;
                 console.log(tasks);
                 storeTasks(tasks);
-                displayAllTasks();
             }
         }
     });
