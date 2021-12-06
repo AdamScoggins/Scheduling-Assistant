@@ -6,10 +6,10 @@
 <script type="text/javascript" src="js/tasksApi.js"></script>
 <script type="text/javascript" src="js/taskDisplay.js"></script>
 </head>
-<body onload="displayAllTasks()">
+<body onload="startup()">
 
 <div class="main">
-<h1>Scheduling Assistant</h1>
+<h1 id="calendarHeader">January</h1>
 <ul class="calendar calendarWeeks">
  <li>Sunday</li>
  <li>Monday</li>
@@ -53,9 +53,9 @@
  <li>27<br><br><br><br></li>
  <li>28<br><br><br><br></li>
  <br>
- <li>29<br><br><br><br></li>
- <li>30<br><br><br><br></li>
- <li>31<br><br><br><br></li>
+ <li><br><br><br><br></li>
+ <li><br><br><br><br></li>
+ <li><br><br><br><br></li>
  <li><br><br><br><br></li>
  <li><br><br><br><br></li>
  <li><br><br><br><br></li>
@@ -74,9 +74,13 @@
   <label for="date">Date:</label><br>
   <input type="date" id="date" name="date" required><br><br>
   <input type="submit" value="Create Project">
+  <br>
+  <button type="button" onclick="incrementMonth(-1);">Previous Month</button>
+  <button type="button" onclick="incrementMonth(1);">Next Month</button>
 </form>
 </div>
-
+<p id="currentMonth"></p>
 </div>
+
 </body>
 </html>
